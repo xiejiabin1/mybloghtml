@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:bind="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友链管理</title>
+    <link href="../images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/me.css">
+</head>
+<body>
+<script src="../lib/live2d/autoload.js"></script>
+<div id="friendLink">
+    <!--导航栏-->
+    <nav class="ui inverted gird-header" >
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui olive header item">博客后台管理</h2>
+                <a href="blog.html" class="m-item item m-mobile-hide"><i class="home icon"></i>文章管理</a>
+                <a href="types.html" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类管理</a>
+                <a href="showUser.html" class="m-item item m-mobile-hide"><i class="user icon"></i>用户管理</a>
+                <a href="friendLinks.html" class="active m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友链管理</a>
+                <a href="pictures.html" class=" m-item item m-mobile-hide"><i class="image icon"></i>相册管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" id="userAvatar">
+                            <span id="spanName"></span>
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="javascript:;" id="goUpdate" class="item">修改信息</a>
+                            <div class="divider"></div>
+                            <a href="javascript:;" class="item" id="exit">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <div class="m-padded-tb-hugex"></div>
+
+    <!--中间内容-->
+    <div  class="m-padded-tb-big">
+        <div class="ui container">
+            <div  class="ui secondary segment form">
+                <div class="inline fields">
+                    <div class="field">
+                        <input type="text" v-model="name" placeholder="友链名称">
+                        <button id="clear-btn" class="ui compact button">clear</button>
+                    </div>
+                    <div class="field">
+                        <button id="search" type="button" @click="getInfo(1)" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+                    </div>
+                </div>
+            </div>
+            <table class="ui compact teal table">
+                <thead>
+                <tr align="center">
+                    <th width="7%">ID</th>
+                    <th>博客名称</th>
+                    <th>博客地址</th>
+                    <th>图片地址</th>
+                    <th>添加时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align="center" v-for="friendLink in pageInfo.list">
+                    <td v-bind:data-tooltip="friendLink.description">{{friendLink.friendLinkId}}</td>
+                    <td v-bind:data-tooltip="friendLink.description">{{friendLink.blogName}}</td>
+                    <td v-bind:data-tooltip="friendLink.description">{{friendLink.blogAddress}}</td>
+                    <td v-bind:data-tooltip="friendLink.description">{{friendLink.blogPicture}}</td>
+                    <td v-bind:data-tooltip="friendLink.description">{{friendLink.createTime | dateFormat}}</td>
+                    <td>
+                        <a href="javascript:;" @click="updateFriendLink(friendLink.friendLinkId)" class="ui mini teal basic button">编辑</a>
+                        <a href="javascript:;" @click="delLink(friendLink.friendLinkId)"  class="ui mini red basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="6" >
+                        <div class="ui mini pagination menu">
+                            <a class="item" href="javascript:;" @click="getInfo(pageInfo.isFirstPage ? pageInfo.pageNum : (pageInfo.pageNum-1))">上一页</a>
+                            <template v-for="Num in pageInfo.navigatepageNums">
+                                <a class="item active" href="javascript:;" @click="getInfo(Num)" v-if="Num == pageNum" >{{Num}}</a>
+                                <a class="item" href="javascript:;" @click="getInfo(Num)" v-else>{{Num}}</a>
+                            </template>
+                            <a class="item" href="javascript:;" @click="getInfo(pageInfo.isLastPage ? pageInfo.pageNum : (pageInfo.pageNum+1))">下一页</a>
+                            <p class="item">第&nbsp;{{pageNum}}&nbsp;页&nbsp;/&nbsp;共&nbsp;{{pageInfo.pages}}&nbsp;页</p>
+                        </div>
+                        <a href="javascript:;" @click="addFriendLink()" class="ui mini right floated teal basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+            <div class="ui success message" v-if="message != ''">
+                <i class="close icon"></i>
+                <div class="header">提示：<p >{{message}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除提示框 -->
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            是否删除？
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button"><i class="remove icon"></i>否</div>
+            <div class="ui green inverted button" id="delLink"><i class="checkmark icon"></i>是</div>
+        </div>
+    </div>
+
+    <!-- 新增 -->
+    <div class="ui modal addLink">
+        <div class="header">新增友链</div>
+        <div class="content">
+            <form class="ui form">
+                <div class="required field">
+                    <label>博客名称（blogName）</label>
+                    <input type="text" v-model="addLink.blogName">
+                </div>
+                <div class="required field">
+                    <label>博客地址（blogAddress）</label>
+                    <input type="text" v-model="addLink.blogAddress">
+                </div>
+                <div class="required field">
+                    <label>图片地址（blogPicture）</label>
+                    <input type="text" v-model="addLink.blogPicture">
+                </div>
+                <div class="field">
+                    <label>博客描述（description）</label>
+                    <input type="text" v-model="addLink.description">
+                </div>
+            </form>
+            <div class="ui mini negative message" v-if="addLink.error != ''">{{addLink.error}}</div>
+        </div>
+        <div class="actions">
+            <div class="ui negative button">取消</div>
+            <div class="ui green right labeled icon button" id="addLink">新增<i class="checkmark icon"></i></div>
+        </div>
+    </div>
+
+    <!-- 修改-->
+    <div class="ui modal updateLink">
+        <div class="header">修改友链</div>
+        <div class="content">
+            <form class="ui form">
+                <div class="required field">
+                    <label>博客名称（blogName）</label>
+                    <input type="text" v-model="updateLink.blogName">
+                </div>
+                <div class="required field">
+                    <label>博客地址（blogAddress）</label>
+                    <input type="text" v-model="updateLink.blogAddress">
+                </div>
+                <div class="required field">
+                    <label>图片地址（blogPicture）</label>
+                    <input type="text" v-model="updateLink.blogPicture">
+                </div>
+                <div class="field">
+                    <label>博客描述（description）</label>
+                    <input type="text" v-model="updateLink.description">
+                </div>
+            </form>
+            <div class="ui mini negative message" v-if="updateLink.error != ''">{{updateLink.error}}</div>
+        </div>
+        <div class="actions">
+            <div class="ui negative button">取消</div>
+            <div class="ui green right labeled icon button" id="updateLink">提交<i class="checkmark icon"></i></div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!--底部栏-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+        <!--容器-->
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="four wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced " >联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">Email：2501267970@qq.com</a>
+                        <a href="#" class="item m-text-thin">QQ：2501267970</a>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >关注公众号</h4>
+                            <img src="../images/gongzhonghao.jpg" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >微信号</h4>
+                            <img src="../images/WX.png" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">网站信息</div>
+                    <div id="blog-message"><div class="ui inverted link list" style="align-content: center;margin-top: 10px">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <!--博客运行时间统计-->
+            <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">
+                我的网站已运行：<span id="htmer_time" class="item m-text-thin"></span>
+            </div>
+            <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">湘ICP备20013183号-1</a>
+        </div>
+    </footer>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="../js/serviceIp.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../js/admin/adminCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script src="../js/admin/friendLink.js"></script>
+<script src="../js/foot.js"></script>
+</html>

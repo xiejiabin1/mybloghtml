@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>先谢郭嘉的博客-关于我</title>
+    <link href="images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <link rel="stylesheet" href="css/me.css">
+</head>
+<body>
+<script src="lib/live2d/autoload.js"></script>
+<!--导航-->
+<nav id="nav" class="gird-header" style="display: none">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui olive header item" style="font-family: STSong">先谢郭嘉</h2>
+            <div class="right m-item item m-mobile-hide">
+                <a href="index.html" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="types.html?id=1" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
+                <a href="archives.html" class="m-item item m-mobile-hide"><i class="clock icon"></i>时间轴</a>
+                <a href="message.html" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
+                <a href="friendLink.html" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友链</a>
+                <a href="program.html" class="m-item item m-mobile-hide"><i class="coffee icon"></i>程序</a>
+                <a href="about.html" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown">
+                        <div class="text">
+                            <img class="ui avatar image" id="userAvatar">
+                            <span id="spanName"></span>
+                        </div>
+                        <i class="dropdown icon" id="ico"></i>
+                        <div class="menu" id="menu">
+                            <a href="javascript:;" id="goUpdate" class="item">修改信息</a>
+                            <div class="divider"></div>
+                            <a href="javascript:;" class="item" id="exit">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:;" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--顶部图片-->
+<div class="m-bg-type_outer" style="width: 100%;height: 400px" id="waypoint">
+    <img src="images/background11.jpg" alt="" class="ui m-bg image" style="width: 100%;height: 100%">
+    <div class="m-bg-class_cover">
+        <div class="ui container" style="position: relative ;bottom: -250px;">
+            <div class="m-font-size-title m-right-bottom" align="center" style="font-family:'STXingkai'">关于我</div>
+            <div class="m-font-size-text-init-title m-margin-top" align="center">Code changes the world</div>
+        </div>
+    </div>
+</div>
+
+<!--悬浮框-->
+<div class="levitate">
+    <div class="ui secondary segment form">
+        <div align="center">
+            <h4>名称：先谢郭嘉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坐标：湖南衡阳</h4>
+        </div>
+        <br>
+        <div class="ui input">
+            <input type="text" placeholder="站内搜索..." id="searchStr">
+            <a class="ui mini primary button" id="search"><i class="search icon"></i>search</a>
+        </div>
+        <br>
+        <br>
+        <div align="center"> <h4>音乐盒</h4></div>
+        <div id="aplayer" class="aplayer" data-id="4877773231" data-server="netease" data-type="playlist" data-fixed="false" data-listfolded="true" data-order="list" data-theme="#F58EA8" style="width: 100%"></div>
+    </div>
+</div>
+
+<!--个人资料描述-->
+<div class="ui container m-opacity box-shadow-max">
+    <div class="ui segment m-margin-" align="center">
+        <div class="m-margin-top-maxx" align="center">
+            <img class="ui circular image" align="center" src="images/me.jpg" style="width: 150px;height: 150px;">
+        </div>
+        <div class="m-margin-top-small" style="font-size: x-large;font-family: STSong" align="center">先谢郭嘉</div>
+        <br>
+        <div class="" align="center">
+            <a href="javascript:;" class="ui tencent circular icon button"><i class="user icon"></i></a>
+            <a href="javascript:;" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+            <a href="javascript:;" class="ui qq circular icon button" data-content="2501267970" data-position="bottom center"><i class="qq icon"></i></a>
+            <a href="javascript:;" class="ui email circular icon button" data-content="2501267970@qq.com" data-position="bottom center"><i class="envelope  icon"></i></a>
+        </div>
+
+        <div class="ui tencent-qr flowing popup transition hidden">
+            <img src="images/gongzhonghao.jpg" alt="" class="ui rounded image" style="width: 110px">
+            <div align="center">公众号</div>
+        </div>
+        <div class="ui wechat-qr flowing popup transition hidden">
+            <img src="images/WX.png" alt="" class="ui rounded image" style="width: 110px">
+            <div align="center">微信</div>
+        </div>
+        <div class="ui qq-qr flowing popup transition hidden">
+            <img src="images/QQ.PNG" alt="" class="ui rounded image" style="width: 110px">
+            <div align="center">QQ</div>
+        </div>
+        <h3 class="m-font-size-text" align="center" style="color: #2c2c2c">Code changes the world</h3>
+        <hr style="width: 30%">
+        <br>
+        <div>
+            <h4>个人信息</h4>
+            <p>名称：先谢郭嘉</p>
+            <p>年龄：98年</p>
+            <p>坐标：湖南衡阳</p>
+            <p>职业：求职中</p>
+            <br>
+            <h4>网站信息</h4>
+            <p><a href="http://www.xiejiabin.online/">域名：www.xiejiabin.online</a></p>
+            <p><a href="http://cloud.tencent.com/">服务器：腾讯云服务器</a></p>
+            <p><a href="http://semantic-ui.com/">前端框架：semantic-ui</a></p>
+            <p><a href="#">后端：SpringBoot，Mybatis</a></p>
+            <p><a href="#">前端模板：Vue.js，jQuery.js</a></p>
+
+        </div>
+        <hr class="m-margin-top-large">
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced " >联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item m-text-thin">Email：2501267970@qq.com</a>
+                    <a href="#" class="item m-text-thin">QQ：2501267970</a>
+                </div>
+            </div>
+            <div class="four wide column" >
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--微信二维码-->
+                        <h4 class="ui inverted header m-text-thin m-text-spaced " >关注公众号</h4>
+                        <img src="../images/gongzhonghao.jpg" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column" >
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--微信二维码-->
+                        <h4 class="ui inverted header m-text-thin m-text-spaced " >微信号</h4>
+                        <img src="../images/WX.png" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">网站信息</div>
+                <div id="blog-message"><div class="ui inverted link list" style="align-content: center;margin-top: 10px">
+                    <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                        文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 篇
+                    </div>
+                    <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                        访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 次
+                    </div>
+                    <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                        评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                    </div>
+                    <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                        留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                    </div>
+                </div></div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <!--博客运行时间统计-->
+        <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">
+            我的网站已运行：<span id="htmer_time" class="item m-text-thin"></span>
+        </div>
+        <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">湘ICP备20013183号-1</a>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/serviceIp.js"></script>
+<script src="lib/waypoints/jquery.waypoints.min.js"></script>
+<script src="js/user/userCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://unpkg.com/meting@1.2/dist/Meting.min.js"></script>
+<script src="js/user/about.js"></script>
+<script src="js/foot.js"></script>
+</body>
+</html>

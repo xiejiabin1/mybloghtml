@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>先谢郭嘉的博客-修改信息</title>
+    <link href="images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/me.css">
+</head>
+<body>
+<div id="updateUser">
+    <script src="lib/live2d/autoload.js"></script>
+    <!--导航-->
+    <nav id="nav" class="gird-header" style="display: none">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui olive header item" style="font-family: STSong">先谢郭嘉</h2>
+                <div class="right m-item item m-mobile-hide">
+                    <a href="index.html" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                    <a href="types.html?id=1" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
+                    <a href="archives.html" class="m-item item m-mobile-hide"><i class="clock icon"></i>时间轴</a>
+                    <a href="message.html" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
+                    <a href="friendLink.html" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友链</a>
+                    <a href="program.html" class="m-item item m-mobile-hide"><i class="coffee icon"></i>程序</a>
+                    <a href="about.html" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                    <div class="right m-item m-mobile-hide menu">
+                        <div class="ui dropdown">
+                            <div class="text">
+                                <img class="ui avatar image" id="userAvatar">
+                                <span id="spanName"></span>
+                            </div>
+                            <i class="dropdown icon" id="ico"></i>
+                            <div class="menu" id="menu">
+                                <a href="javascript:;" id="goUpdate" class="item">修改信息</a>
+                                <div class="divider"></div>
+                                <a href="javascript:;" class="item" id="exit">注销</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:;" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--顶部图片-->
+    <div class="m-bg-type_outer" style="width: 100%;height: 400px" id="waypoint">
+        <img src="images/background12.jpg" alt="" class="ui m-bg image" style="width: 100%;height: 100%">
+        <div class="m-bg-class_cover">
+            <div class="ui container" style="position: relative ;bottom: -250px;">
+                <div class="m-font-size-title m-right-bottom" align="center" style="font-family:'STXingkai'">修改个人信息</div>
+                <div class="m-font-size-text-init-title m-margin-top" align="center">Code changes the world</div>
+            </div>
+        </div>
+    </div>
+
+    <!--中间内容-->
+    <div  class="m-padded-tb-massive">
+        <div class="ui container">
+            <div class="ui attached message">
+                <div class="header">
+                    修改个人信息
+                </div>
+                <p>请修改个人信息并提交</p>
+            </div>
+            <form class="ui big form">
+                <div class="ui  segment">
+                    <div class="field">
+                        <label>昵称（nickName）</label>
+                        <input type="text" v-model="user.nickName" name="nickName" @blur="nickNameBlur()">
+                    </div>
+                    <div class="required field disabled">
+                        <label>用户名（userName）</label>
+                        <input type="text" v-model="user.userName">
+                    </div>
+                    <div class="required field">
+                        <label>密码（password）</label>
+                        <input type="password" v-model="user.password" name="password" @blur="passwordBlur()">
+                    </div>
+                    <div class="required field">
+                        <label>确认密码（password）</label>
+                        <input type="password" v-model="user.password2" @blur="password2Blur()">
+                    </div>
+                    <div class="required field">
+                        <label>邮箱（email）</label>
+                        <input type="email" v-model="user.email" name="email" @blur="emailBlur()">
+                    </div>
+                    <div class="six field">
+                        <label>头像（avatar）</label>
+                        <img v-bind:src="'http://152.136.107.185:8089/myblog/'+user.avatar" style="width: 100px;height: 100px;border-radius:50%" id="avatar">
+                        <input id="file" type="file" name="file" multiple>
+                    </div>
+
+                    <button class="ui button" @click.prevent="updateUser()">提交</button>
+                </div>
+            </form>
+            <div class="ui bottom attached warning message" v-if="error != ''">
+                {{error}}
+            </div>
+        </div>
+    </div>
+
+    <!--底部栏-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+        <!--容器-->
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="four wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced " >联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">Email：2501267970@qq.com</a>
+                        <a href="#" class="item m-text-thin">QQ：2501267970</a>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >关注公众号</h4>
+                            <img src="images/gongzhonghao.jpg" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >微信号</h4>
+                            <img src="images/WX.png" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">网站信息</div>
+                    <div id="blog-message"><div class="ui inverted link list" style="align-content: center;margin-top: 10px">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <!--博客运行时间统计-->
+            <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">
+                我的网站已运行：<span id="htmer_time" class="item m-text-thin"></span>
+            </div>
+            <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">湘ICP备20013183号-1</a>
+        </div>
+    </footer>
+
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="js/jquery.params.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/serviceIp.js"></script>
+<script src="lib/waypoints/jquery.waypoints.min.js"></script>
+<script src="js/user/userCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script src="js/user/user.js"></script>
+<script src="js/foot.js"></script>
+</html>

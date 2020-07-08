@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:bind="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改博客文章</title>
+    <link href="../images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../lib/editormd/css/editormd.min.css">
+    <link rel="stylesheet" href="../css/me.css">
+</head>
+<body>
+<script src="../lib/live2d/autoload.js"></script>
+<div id="updateBlog">
+    <!--导航栏-->
+    <nav class="ui inverted gird-header" >
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui olive header item">博客后台管理</h2>
+                <a href="blog.html" class="m-item item m-mobile-hide"><i class="home icon"></i>文章管理</a>
+                <a href="types.html" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类管理</a>
+                <a href="showUser.html" class="m-item item m-mobile-hide"><i class="user icon"></i>用户管理</a>
+                <a href="friendLinks.html" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友链管理</a>
+                <a href="pictures.html" class=" m-item item m-mobile-hide"><i class="image icon"></i>相册管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" id="userAvatar">
+                            <span id="spanName"></span>
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="javascript:;" id="goUpdate" class="item">修改信息</a>
+                            <div class="divider"></div>
+                            <a href="javascript:;" class="item" id="exit">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <div class="m-padded-tb-hugex"></div>
+
+    <div class="ui container">
+        <form id="blog-form" class="ui form">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <div class="ui selection compact teal basic dropdown label">
+                        <input type="hidden" v-model="blog.flag" name="flag">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">标签</div>
+                        <div class="menu">
+                            <div class="item" data-value="原创">原创</div>
+                            <div class="item" data-value="转载">转载</div>
+                            <div class="item" data-value="翻译">翻译</div>
+                        </div>
+                    </div>
+                    <input type="text" name="title" placeholder="标题" v-model="blog.title">
+                </div>
+            </div>
+
+            <div class="required field">
+                <div class="" id="md-content" style="z-index: 1 !important;">
+                    <textarea placeholder="博客内容" name="content" style="display: none" v-model="blog.content"></textarea>
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact teal basic label">分类</label>
+                        <div class="ui fluid selection dropdown">
+                            <input type="hidden" name="typeId" v-bind:value="blog.typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">分类</div>
+                            <div class="menu">
+                                <div v-for="blogType in blogTypeList" class="item blogType" v-bind:data-value="blogType.id">{{blogType.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui teal basic label">首图</label>
+                        <input type="text" name="firstPicture" v-bind:value="blog.firstPicture" placeholder="首图引用地址">
+                    </div>
+                </div>
+
+            </div>
+            <div class="required field">
+                <textarea name="description" v-model="blog.description" placeholder="博客描述..." maxlength="200"></textarea>
+            </div>
+
+            <div class="inline fields">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" v-bind:checked="blog.recommend" id="recommend">
+                        <label style="color: #00c4ff">推荐</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" v-bind:checked="blog.shareStatement" id="shareStatement">
+                        <label style="color: #00c4ff">转载声明</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" v-bind:checked="blog.appreciation" id="appreciation">
+                        <label style="color: #00c4ff">赞赏</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" v-bind:checked="blog.commentBled" id="commentBled">
+                        <label style="color: #00c4ff">评论</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui error message"></div>
+
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+                <button type="button" @click="subBtn()" class="ui teal button">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 操作提示框-->
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            {{message}}
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!--底部栏-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+        <!--容器-->
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="four wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced " >联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">Email：2501267970@qq.com</a>
+                        <a href="#" class="item m-text-thin">QQ：2501267970</a>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >关注公众号</h4>
+                            <img src="../images/gongzhonghao.jpg" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column" >
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--微信二维码-->
+                            <h4 class="ui inverted header m-text-thin m-text-spaced " >微信号</h4>
+                            <img src="../images/WX.png" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">网站信息</div>
+                    <div id="blog-message"><div class="ui inverted link list" style="align-content: center;margin-top: 10px">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;"></h2> 条
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <!--博客运行时间统计-->
+            <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">
+                我的网站已运行：<span id="htmer_time" class="item m-text-thin"></span>
+            </div>
+            <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">湘ICP备20013183号-1</a>
+        </div>
+    </footer>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../js/jquery.params.js"></script>
+<script src="../js/serviceIp.js"></script>
+<script src="../js/admin/adminCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script src="../js/admin/updateBlog.js"></script>
+<script src="../lib/editormd/editormd.min.js"></script>
+<script src="../js/foot.js"></script>
+</html>

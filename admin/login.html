@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客后台管理登录</title>
+    <link href="../images/favicon.ico" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/me.css">
+</head>
+<body>
+<script src="../lib/live2d/autoload.js"></script>
+<br><br><br>
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;" id="adminLogin">
+    <div class="ur container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        博客后台管理登录
+                    </div>
+                </h2>
+                <form class="ui large form">
+                    <div class="ui  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" v-model="userName" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" v-model="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <button class="ui fluid teal button" @click.prevent="login()">登   录</button>
+                    </div>
+                    <div class="ui mini negative message" v-if="error != ''">{{error}}</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script src="../js/serviceIp.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../js/admin/login.js"></script>
+</html>
