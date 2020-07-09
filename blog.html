@@ -58,29 +58,29 @@
         <img v-bind:src="blog.firstPicture" alt="" class="ui m-bg image" style="width: 100%;height: 100%">
         <div class="m-bg-class_cover">
             <div class="ui container" style="position: relative ;bottom: -250px;">
-                <h2 class="m-font-size-title-large" align="center">{{blog.title}}</h2>
+                <h2 class="m-font-size-title-large" align="center" v-cloak>{{blog.title}}</h2>
                 <div class="ui container" align="center">
                     <div class="ui horizontal link list" align="center">
                         <div class="item">
-                            <div class="ui orange basic label" style="font-size: 7px">{{blog.flag}}</div>
+                            <div class="ui orange basic label" style="font-size: 7px" v-cloak>{{blog.flag}}</div>
                         </div>
                         <div class="item">
                             <i class="user outline outline icon m-font-size-text-mini"></i>
-                            <a href="#" style="color: #ffffff;font-size: 18px">{{blog.user.nickName}}</a>
+                            <a href="#" style="color: #ffffff;font-size: 18px" v-cloak>{{blog.user.nickName}}</a>
                         </div>
                         <div class="item">
                             <i class="calendar icon m-font-size-text-mini"></i>
-                            <span class="m-font-size-text-mini">{{blog.createTime | dateFormat}}</span>
+                            <span class="m-font-size-text-mini" v-cloak>{{blog.createTime | dateFormat}}</span>
                         </div>
                         <div class="item">
                             <i class="clone icon m-font-size-text-mini"></i>
-                            <a href="#" target="_blank" style="color: #ffffff;font-size: 16px">{{blog.blogType.name}}</a>
+                            <a href="#" target="_blank" style="color: #ffffff;font-size: 16px" v-cloak>{{blog.blogType.name}}</a>
                         </div>
                         <div class="item">
-                            <i class="eye icon m-font-size-text-mini"></i><span class="m-font-size-text-mini">{{blog.views}}</span>
+                            <i class="eye icon m-font-size-text-mini"></i><span class="m-font-size-text-mini" v-cloak>{{blog.views}}</span>
                         </div>
                         <div class="item">
-                            <i class="comment icon m-font-size-text-mini"></i><span class="m-font-size-text-mini">{{blog.commentCount}}</span>
+                            <i class="comment icon m-font-size-text-mini"></i><span class="m-font-size-text-mini" v-cloak>{{blog.commentCount}}</span>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 *{
     cursor:url(../images/mouse.ico),auto;
-    margin:0; padding:0;
+    margin:0px; padding:0px;
 }
-
+[v-cloak] {
+	display: none;
+}
 .levitate {
     width: 355px;
     height: 400px;
@@ -28,7 +30,7 @@
     z-index:10 !important;
 }
 body{
-    background-image: url("../images/background.jpg");
+    background-image: url("https://xiejiabin-1259671813.cos.ap-beijing.myqcloud.com/myblog/background.jpg");
     background-attachment:fixed;
     background-size: 100%;
     no-repeat: center top;
