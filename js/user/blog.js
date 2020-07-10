@@ -104,7 +104,7 @@ let blogDetail = new Vue({
 
             //代码高亮
             Prism.highlightAll();
-        },1000);
+        },500);
 
         setTimeout(function () {
             //目录
@@ -117,7 +117,7 @@ let blogDetail = new Vue({
                 headingSelector: 'h1, h2, h3',//产生目录的级别
             });
             tocbot.refresh();
-        },2000);
+        },800);
 
         $(document).on("input propertychange","textarea",function(){
             if(blogDetail.content == null || blogDetail.content == ''){

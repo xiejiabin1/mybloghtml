@@ -62,7 +62,7 @@ setTimeout(function () {
         window.location.href = "error.html";
     }
 });
-},3000);
+},1000);
 
 
 var stop, staticx;

@@ -51,7 +51,7 @@ let archives = new Vue({
         this.getList();
         setTimeout(function () {
             archives.load();
-        },1000);
+        },200);
 
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
