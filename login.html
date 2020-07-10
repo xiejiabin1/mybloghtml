@@ -41,7 +41,7 @@
                 <div class="ui message" @click="addUser()">
                     新用户？ <a href="javascript:;">注册</a>
                 </div>
-                <div class="ui mini negative message" v-if="error != ''">{{error}}</div>
+                <div class="ui mini negative message" v-if="error != ''" v-cloak>{{error}}</div>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
 <script src="js/serviceIp.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/xiejiabin1/mybloghtml/js/cookie.js"></script>
-<script src="jhttps://cdn.jsdelivr.net/gh/xiejiabin1/mybloghtml/s/user/login.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xiejiabin1/mybloghtml/js/user/login.js"></script>
 <script>
     var stop, staticx;
     var img = new Image();
