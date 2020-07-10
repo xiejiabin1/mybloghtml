@@ -122,7 +122,7 @@
                 <a v-bind:href="'blog.html?blogId='+blog.blogId" class="class_outer" target="_blank">
                     <img v-bind:src="blog.firstPicture" alt="" class="ui rounded image">
                     <span class="class_cover" >
-                     <h4 class="m-font-size-blog-text m-margin-tb-tiny">{{blog.title}}</h4>
+                     <h4 class="m-font-size-blog-text m-margin-tb-tiny" v-cloak>{{blog.title}}</h4>
                   </span>
                 </a>
             </div>
@@ -134,7 +134,7 @@
         <div class="ui container">
             <div class="ui stackable grid">
                 <!--博客内容-->
-                <div class="ui vertical segment">
+                <div class="">
                     <div class="ui m-container-small m-opacity">
                         <div class="ui secondary segment " align="center">
                             <i class="bookmark icon"></i>最新文章
@@ -146,26 +146,26 @@
                             <!--博文信息-->
                             <div class="eleven wide column ">
                                 <h3 class="ui header" ><a v-bind:href="'blog.html?blogId='+blog.blogId" target="_blank" class="m-black">{{blog.title}}</a></h3>
-                                <p class="m-text m-margin-top-max">{{blog.description}}......</p>
+                                <p class="m-text m-margin-top-max" v-cloak>{{blog.description}}......</p>
                                 <div class="ui m-margin-top-max grid">
                                     <div class="eleven wide column">
                                         <div class="ui mini horizontal link list">
                                             <div class="item">
                                                 <img v-bind:src="'http://152.136.107.185:8089/myblog/'+blog.user.avatar" alt="" class="ui avatar image">
-                                                <div class="content"><a href="javascript:;" class="header">{{blog.user.nickName}}</a></div>
+                                                <div class="content"><a href="javascript:;" class="header" v-cloak>{{blog.user.nickName}}</a></div>
                                             </div>
-                                            <div class="item">
+                                            <div class="item" v-cloak>
                                                 <i class="calendar icon"></i><span>{{blog.createTime | dateFormat}}</span>
                                             </div>
-                                            <div class="item">
+                                            <div class="item" v-cloak>
                                                 <i class="eye icon"></i><span>{{blog.views}}</span>
                                             </div>
-                                            <div class="item">
+                                            <div class="item" v-cloak>
                                                 <i class="comment outline icon"></i><span>{{blog.commentCount}}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="right aligned five wide column">
+                                    <div class="right aligned five wide column" v-cloak>
                                         <a href="javascript:;" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" @click="goType(blog.blogType.id)">{{blog.blogType.name}}</a>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                         <div class="three wide column">
                             <a href="javascript:;" class="ui mini teal basic button" v-if="!pageInfo.isFirstPage" @click="getInfo(pageInfo.isFirstPage ? pageInfo.pageNum : (pageInfo.pageNum-1))">上一页</a>
                         </div>
-                        <div class="ten wide column" align="center">
+                        <div class="ten wide column" align="center" v-cloak>
                             <p><span>{{pageNum}}</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span>{{pageInfo.pages}}</span></p>
                         </div>
                         <div class="three wide column">
