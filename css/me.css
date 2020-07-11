@@ -30,7 +30,7 @@
     z-index:10 !important;
 }
 body{
-    background-image: url("https://xiejiabin-1259671813.cos.ap-beijing.myqcloud.com/myblog/background.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/xiejiabin1/images/myblog/background.jpg");
     background-attachment:fixed;
     background-size: 100%;
     no-repeat: center top;
