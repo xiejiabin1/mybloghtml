@@ -107,7 +107,7 @@
                             <h3 class="ui dividing header">留言</h3>
                             <div class="comment" v-for="message in messageList">
                                 <a class="avatar">
-                                    <img v-bind:src="'http://152.136.107.185:8089/myblog/'+message.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
+                                    <img v-bind:src="'https://xiejiabin.online/images/avatar/'+message.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
                                 </a>
                                 <div class="content">
                                     <a class="author">
@@ -128,7 +128,7 @@
                                 <div class="comments" v-if="message.replyMessagesList != null">
                                     <div class="comment" v-for="replayMessage in message.replyMessagesList">
                                         <a class="avatar">
-                                            <img v-bind:src="'http://152.136.107.185:8089/myblog/'+replayMessage.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
+                                            <img v-bind:src="'https://xiejiabin.online/images/avatar/'+replayMessage.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
                                         </a>
                                         <div class="content">
                                             <a class="author">

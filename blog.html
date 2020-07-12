@@ -172,7 +172,7 @@
                                     <h3 class="ui dividing header" v-if="blog.commentCount==0">暂无评论</h3>
                                     <div class="comment" v-for="comment in blog.commentList">
                                         <a class="avatar">
-                                            <img v-bind:src="'http://152.136.107.185:8089/myblog/'+comment.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
+                                            <img v-bind:src="'https://xiejiabin.online/images/avatar/'+comment.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
                                         </a>
                                         <div class="content">
                                             <a class="author">
@@ -193,7 +193,7 @@
                                         <div class="comments" v-if="comment.replyCommentList != null">
                                             <div class="comment" v-for="replyComment in comment.replyCommentList">
                                                 <a class="avatar">
-                                                    <img v-bind:src="'http://152.136.107.185:8089/myblog/'+replyComment.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
+                                                    <img v-bind:src="'https://xiejiabin.online/images/avatar/'+replyComment.user.avatar" style="width: 35px;height: 35px;border-radius: 50%">
                                                 </a>
                                                 <div class="content">
                                                     <a class="author">

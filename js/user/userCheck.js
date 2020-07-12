@@ -10,7 +10,7 @@ $(document).ready(function () {
         $.get(serverIp+"user/selectUserByUserId",{userId:userId},function (bto) {
             let user = bto.data;
             if(user != null){
-                $("#userAvatar").attr("src","http://152.136.107.185:8089/myblog/"+user.avatar);
+                $("#userAvatar").attr("src","https://xiejiabin.online/images/avatar/"+user.avatar);
                 $("#spanName").html(user.nickName);
                 $("#goUpdate").on("click",function () {
                     window.location.href="user.html?userId="+user.userId;
