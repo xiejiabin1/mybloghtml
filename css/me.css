@@ -29,7 +29,10 @@
     right:100px;
     z-index:10 !important;
 }
-@media ( max-width:768px ){.levitate{width: 100px;height: 100px;}}
+@media ( max-width:768px ){
+    .levitate{display: none}
+    .levitate2{display: none}
+}
 body{
     background-image: url("https://cdn.jsdelivr.net/gh/xiejiabin1/images/myblog/background.jpg");
     background-attachment:fixed;
