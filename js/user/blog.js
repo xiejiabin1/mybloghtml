@@ -93,20 +93,6 @@ let blogDetail = new Vue({
         this.getBlog();
 
         setTimeout(function () {
-            window.document.title = blogDetail.blog.title;
-
-            //赞赏
-            $('#payButton').popup({
-                popup : $('.payQR'),
-                on : 'click',
-                position: 'bottom center'
-            });
-
-            //代码高亮
-            Prism.highlightAll();
-        },1000);
-
-        setTimeout(function () {
             //目录
             tocbot.init({
                 // Where to render the table of contents.
@@ -116,8 +102,17 @@ let blogDetail = new Vue({
                 // Which headings to grab inside of the contentSelector element.
                 headingSelector: 'h1, h2, h3',//产生目录的级别
             });
+            //赞赏
+            $('#payButton').popup({
+                popup : $('.payQR'),
+                on : 'click',
+                position: 'bottom center'
+            });
+            window.document.title = blogDetail.blog.title;
+            //代码高亮
+            Prism.highlightAll();
             tocbot.refresh();
-        },800);
+        },1000);
 
         $(document).on("input propertychange","textarea",function(){
             if(blogDetail.content == null || blogDetail.content == ''){
