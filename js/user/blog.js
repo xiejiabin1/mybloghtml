@@ -112,7 +112,7 @@ let blogDetail = new Vue({
             //代码高亮
             Prism.highlightAll();
             tocbot.refresh();
-        },900);
+        },1000);
 
         $(document).on("input propertychange","textarea",function(){
             if(blogDetail.content == null || blogDetail.content == ''){
