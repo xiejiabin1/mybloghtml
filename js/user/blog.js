@@ -104,7 +104,7 @@ let blogDetail = new Vue({
 
             //代码高亮
             Prism.highlightAll();
-        },500);
+        },1000);
 
         setTimeout(function () {
             //目录
