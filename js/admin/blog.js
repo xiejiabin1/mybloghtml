@@ -12,7 +12,7 @@ let adminBlog = new Vue({
             let blogTypeId = $("#blogTypeId").val();
             let recommend = $("#recommend").get(0).checked;
             $.get(serverIp+"blog/selectBlogAll",
-                {pageNum:pageNum,pageSize:10,searchStr:this.searchStr,typeId:blogTypeId,recommend:recommend},
+                {pageNum:pageNum,pageSize:2,searchStr:this.searchStr,typeId:blogTypeId,recommend:recommend},
                 function (bto) {
                     if(bto.data != null){
                         adminBlog.pageInfo = bto.data;
